@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+<body class="body">
+    <div class="modal-area">
+      <div class="modal">
+        <button class="modal__button-close button-reset button-hovered"></button>
+        <h2 class="modal__title">Редактировать профиль</h2>
+        <form class="modal__form" action="#">
+          <input class="modal__input-text input-reset modal__input_name" name="name" value="" placeholder="Имя" autocomplete="off" required>
+          <input class="modal__input-text input-reset modal__input_specialty" name="specialty" value="" placeholder="О себе" autocomplete="off" required>
+          <button class="modal__button button-reset">
+            <p class="modal__button-text">Сохранить</p>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" src="images/logo.svg" alt="Логотип">
+
+    </header>
+
+    <main class="content">
+
+      <section class="profile">
+        <button class="profile__avatar-button button-reset">
+          <img class="profile__avatar-image" src="images/avatar.jpg" alt="Аватар">
+        </button>
+
+        <div class="profile__info">
+          <h1 class="profile__info-title text-overflow">Жак-Ив Кусто</h1>
+          <button class="profile__info-button button-reset button-hovered"></button>
+          <p class="profile__info-subtitle text-overflow">Исследователь океана</p>
+        </div>
+
+        <button class="profile__add-button button-reset button-hovered"></button>
+      </section>
+
+      <section class="gallery">
+
+        <div class="gallery__card">
+          <img class="gallery__img" src="images/karachevsk.jpg" alt="Карачаевск">
+
+          <div class="gallery__description">
+            <p class="gallery__title text-overflow">Карачаевск</p>
+            <button class="gallery__like-button button-reset"></button>
+          </div>
+        </div>
+
+        <div class="gallery__card">
+          <img class="gallery__img" src="images/elbrus.png" alt="Гора Эльбрус">
+          
+          <div class="gallery__description">
+            <p class="gallery__title text-overflow">Гора Эльбрус</p>
+            <button class="gallery__like-button button-reset"></button>
+          </div>
+        </div>
+
+        <div class="gallery__card">
+          <img class="gallery__img" src="images/dombay.png" alt="Домбай">
+
+          <div class="gallery__description">
+            <p class="gallery__title text-overflow">Домбай</p>
+            <button class="gallery__like-button button-reset"></button>
+          </div>
+        </div>
+
+        <div class="gallery__card">
+          <img class="gallery__img" src="images/karachevsk.jpg" alt="Карачаево-Черкесия">
+
+          <div class="gallery__description">
+            <p class="gallery__title text-overflow">Карачаево-Черкесия</p>
+            <button class="gallery__like-button button-reset"></button>
+          </div>
+        </div>
+
+        <div class="gallery__card">
+          <img class="gallery__img" src="images/elbrus.png" alt="Гора Эльбрус">
+
+          <div class="gallery__description">
+            <p class="gallery__title text-overflow">Гора Эльбрус</p>
+            <button class="gallery__like-button button-reset"></button>
+          </div>
+        </div>
+
+        <div class="gallery__card">
+          <img class="gallery__img" src="images/dombay.png" alt="Домбай">
+
+          <div class="gallery__description">
+            <p class="gallery__title text-overflow">Домбай</p>
+            <button class="gallery__like-button button-reset"></button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer__author">&copy; 2022 Mesto Russia</p>
+    </footer>
+  </div>
+  <script src="./pages/script.js"></script>
+</body>
+</html>

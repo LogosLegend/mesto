@@ -1,0 +1,13 @@
+.modal__input-text {
+  border-bottom: 1px solid #ccc;
+  min-height: 27px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  padding: 0 0 9px;
+}
+
+.modal__input-text:first-child {
+  margin: 0 0 30px;
+}
