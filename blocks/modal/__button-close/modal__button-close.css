@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 530px) {
   .modal__button-close {
-    left: calc(100% - 20px); 
+    left: calc(100% - 20px);
     margin: 0 0 16px;
     min-width: 20px;
     min-height: 20px;

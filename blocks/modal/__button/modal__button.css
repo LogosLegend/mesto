@@ -5,6 +5,9 @@
   background: #000;
   color: #fff;
   border-radius: 2px;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
 }
 
 .modal__button:hover {
@@ -16,5 +19,7 @@
     min-width: 238px;
     min-height: 46px;
     margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

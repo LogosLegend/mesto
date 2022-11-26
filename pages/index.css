@@ -1,8 +1,8 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
-@import url(../blocks/button-reset/button-reset.css);
+@import url(../blocks/button-zeroing/button-zeroing.css);
 @import url(../blocks/text-overflow/text-overflow.css);
-@import url(../blocks/input-reset/input-reset.css);
+@import url(../blocks/input-zeroing/input-zeroing.css);
 @import url(../blocks/button-hovered/button-hovered.css);
 @import url(../blocks/body/body.css);
 @import url(../blocks/content/content.css);
@@ -21,7 +21,6 @@
 @import url(../blocks/modal/__button/modal__button.css);
 @import url(../blocks/modal/__button-close/modal__button-close.css);
 @import url(../blocks/modal/__button-img/modal__button-img.css);
-@import url(../blocks/modal/__button-text/modal__button-text.css);
 @import url(../blocks/modal/__form/modal__form.css);
 @import url(../blocks/modal/__input-text/modal__input-text.css);
 @import url(../blocks/modal/__title/modal__title.css);
