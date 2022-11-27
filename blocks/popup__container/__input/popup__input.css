@@ -1,5 +1,6 @@
-.modal__input-text {
-  border-bottom: 1px solid #ccc;
+.popup__input {
+  border: none;
+  border-bottom: 1px solid #00000033;
   min-height: 27px;
   box-sizing: border-box;
   font-size: 14px;
@@ -8,6 +9,6 @@
   padding: 0 0 9px;
 }
 
-.modal__input-text:first-child {
+.popup__input:first-child {
   margin: 0 0 30px;
 }

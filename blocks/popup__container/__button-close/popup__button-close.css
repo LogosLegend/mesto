@@ -1,4 +1,4 @@
-.modal__button-close {
+.popup__button-close {
   position: absolute;
   background: url(../../../images/close-icon.svg) no-repeat;
   min-width: 32px;
@@ -7,10 +7,14 @@
   left: 100%;
   bottom: 100%;
   margin: 8px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 530px) {
-  .modal__button-close {
+  .popup__button-close {
     left: calc(100% - 20px);
     margin: 0 0 16px;
     min-width: 20px;

@@ -7,18 +7,6 @@
   <title>Место</title>
 </head>
 <body class="body">
-    <div class="modal-area">
-      <div class="modal">
-        <button class="modal__button-close button-zeroing button-hovered"></button>
-        <h2 class="modal__title">Редактировать профиль</h2>
-        <form class="modal__form" action="#">
-          <input class="modal__input-text input-zeroing modal__input-name" name="name" value placeholder="Имя" autocomplete="off" required>
-          <input class="modal__input-text input-zeroing modal__input-specialty" name="specialty" value placeholder="О себе" autocomplete="off" required>
-          <button class="modal__button button-zeroing">Сохранить</button>
-        </form>
-      </div>
-    </div>
-
   <div class="page">
     <header class="header">
       <img class="header__logo" src="images/logo.svg" alt="Логотип">
@@ -28,17 +16,17 @@
     <main class="content">
 
       <section class="profile">
-        <button class="profile__avatar-button button-zeroing">
+        <button class="profile__avatar-button" type="button">
           <img class="profile__avatar-image" src="images/avatar.jpg" alt="Аватар">
         </button>
 
         <div class="profile__info">
           <h1 class="profile__info-title text-overflow">Жак-Ив Кусто</h1>
-          <button class="profile__info-button button-zeroing button-hovered"></button>
+          <button class="profile__info-button button-hovered" type="button"></button>
           <p class="profile__info-subtitle text-overflow">Исследователь океана</p>
         </div>
 
-        <button class="profile__add-button button-zeroing button-hovered"></button>
+        <button class="profile__add-button button-hovered" type="button"></button>
       </section>
 
       <section class="gallery">
@@ -48,7 +36,7 @@
 
           <div class="gallery__description">
             <h2 class="gallery__title text-overflow">Карачаевск</h2>
-            <button class="gallery__like-button button-zeroing"></button>
+            <button class="gallery__like-button" type="button"></button>
           </div>
         </div>
 
@@ -57,7 +45,7 @@
           
           <div class="gallery__description">
             <h2 class="gallery__title text-overflow">Гора Эльбрус</h2>
-            <button class="gallery__like-button button-zeroing"></button>
+            <button class="gallery__like-button" type="button"></button>
           </div>
         </div>
 
@@ -66,7 +54,7 @@
 
           <div class="gallery__description">
             <h2 class="gallery__title text-overflow">Домбай</h2>
-            <button class="gallery__like-button button-zeroing"></button>
+            <button class="gallery__like-button" type="button"></button>
           </div>
         </div>
 
@@ -75,7 +63,7 @@
 
           <div class="gallery__description">
             <h2 class="gallery__title text-overflow">Карачаево-Черкесия</h2>
-            <button class="gallery__like-button button-zeroing"></button>
+            <button class="gallery__like-button" type="button"></button>
           </div>
         </div>
 
@@ -84,7 +72,7 @@
 
           <div class="gallery__description">
             <h2 class="gallery__title text-overflow">Гора Эльбрус</h2>
-            <button class="gallery__like-button button-zeroing"></button>
+            <button class="gallery__like-button" type="button"></button>
           </div>
         </div>
 
@@ -93,7 +81,7 @@
 
           <div class="gallery__description">
             <h2 class="gallery__title text-overflow">Домбай</h2>
-            <button class="gallery__like-button button-zeroing"></button>
+            <button class="gallery__like-button" type="button"></button>
           </div>
         </div>
       </section>
@@ -104,6 +92,18 @@
       <p class="footer__author">&copy; 2022 Mesto Russia</p>
     </footer>
   </div>
-  <script src="./pages/script.js"></script>
+
+  <div class="popup">
+      <div class="popup__container">
+        <button class="popup__button-close button-hovered" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="edit-profile-form" action="#">
+          <input class="popup__input popup__input_name" name="name" value placeholder="Имя" autocomplete="off" required>
+          <input class="popup__input popup__input_specialty" name="specialty" value placeholder="О себе" autocomplete="off" required>
+          <button class="popup__button-submit" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  <script src="./scripts/script.js"></script>
 </body>
 </html>

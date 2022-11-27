@@ -1,3 +1,7 @@
 .profile__avatar-button {
   max-height: 120px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
 }

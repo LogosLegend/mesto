@@ -1,9 +1,10 @@
-.modal-area {
+.popup {
   position: fixed;
   min-width: 100%;
   min-height: 100%;
   top: 0;
   display: none;
   justify-content: center;
+  align-items: center;
   background: #00000080;
 }

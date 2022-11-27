@@ -1,4 +1,4 @@
-.modal__button {
+.popup__button-submit {
   margin: 48px 0 0;
   min-width: 358px;
   min-height: 50px;
@@ -8,14 +8,17 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-.modal__button:hover {
+.popup__button-submit:hover {
   opacity: .8;
 }
 
 @media screen and (max-width: 530px) {
-  .modal__button {
+  .popup__button-submit {
     min-width: 238px;
     min-height: 46px;
     margin-top: 45px;
