@@ -1,7 +1,7 @@
 let modal_area = document.querySelector('.modal-area'),
     profile__info_button = document.querySelector('.profile__info-button'), 
-    modal__input_name = document.querySelector('.modal__input_name'),
-    modal__input_specialty = document.querySelector('.modal__input_specialty'),
+    modal__input_name = document.querySelector('.modal__input-name'),
+    modal__input_specialty = document.querySelector('.modal__input-specialty'),
     profile__info_title = document.querySelector('.profile__info-title'), 
     profile__info_subtitle = document.querySelector('.profile__info-subtitle');
 
