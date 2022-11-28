@@ -1,7 +1,7 @@
 let popup = document.querySelector('.popup'),
     profileInfoButton = document.querySelector('.profile__info-button'), 
-    popupInputName = document.querySelector('.popup__input_name'),
-    popupInputSpecialty = document.querySelector('.popup__input_specialty'),
+    popupInputTypeName = document.querySelector('.popup__input_type_name'),
+    popupInputTypeSpecialty = document.querySelector('.popup__input_type_specialty'),
     profileInfoTitle = document.querySelector('.profile__info-title'), 
     profileInfoSubtitle = document.querySelector('.profile__info-subtitle');
 
@@ -9,8 +9,8 @@ profileInfoButton.addEventListener('click', function() {
 
   popup.classList.add('popup_opened');
 
-  popupInputName.value = profileInfoTitle.textContent;
-  popupInputSpecialty.value = profileInfoSubtitle.textContent;
+  popupInputTypeName.value = profileInfoTitle.textContent;
+  popupInputTypeSpecialty.value = profileInfoSubtitle.textContent;
 });
 
 function popupClose () {
@@ -38,8 +38,8 @@ let popupForm = document.querySelector('.popup__form');
 function handleFormSubmit (e) {
   e.preventDefault();
 
-  profileInfoTitle.textContent = popupInputName.value;
-  profileInfoSubtitle.textContent = popupInputSpecialty.value;
+  profileInfoTitle.textContent = popupInputTypeName.value;
+  profileInfoSubtitle.textContent = popupInputTypeSpecialty.value;
 
   popupClose();
 }
