@@ -1,5 +1,6 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
+@import url(../blocks/preload/preload.css);
 @import url(../blocks/text-overflow/text-overflow.css);
 @import url(../blocks/button-close/button-close.css);
 @import url(../blocks/button-hovered/button-hovered.css);

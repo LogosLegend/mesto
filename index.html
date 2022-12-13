@@ -7,7 +7,7 @@
   <link rel="icon" href="images/logo.svg">
   <title>Место</title>
 </head>
-<body class="body">
+<body class="body preload">
   <div class="page">
     <header class="header">
       <img class="header__logo" src="images/logo.svg" alt="Логотип">
@@ -38,41 +38,49 @@
     </footer>
   </div>
 
-    <template id="gallery-template">
-      <div class="gallery__card">
-        <img class="gallery__img">
-        <button class="gallery__trash-button" type="button"></button>
+  <div class="popup form-popup">
+    <div class="form-popup__container">
+      <button class="button-close button-hovered" type="button"></button>
+      <h2 class="form-popup__title">Редактировать профиль</h2>
+      <form class="form-popup__form" action="#" name="editProfileForm">
+        <input class="form-popup__input form-popup__input_type_profile-name" autocomplete="off" required="" name="fullName" placeholder="Имя">
+        <input class="form-popup__input form-popup__input_type_specialty" autocomplete="off" required="" name="specialty" placeholder="О себе">
+        <button class="form-popup__button-submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
 
-        <div class="gallery__description">
-          <h2 class="gallery__title text-overflow"></h2>
-          <button class="gallery__like-button" type="button"></button>
-        </div>
-      </div>
-    </template>
+  <div class="popup form-popup">
+    <div class="form-popup__container">
+      <button class="button-close button-hovered" type="button"></button>
+      <h2 class="form-popup__title">Новое место</h2>
+      <form class="form-popup__form" action="#" name="editCardForm">
+        <input class="form-popup__input form-popup__input_type_card-name" autocomplete="off" required="" name="cardName" placeholder="Название">
+        <input class="form-popup__input form-popup__input_type_link" autocomplete="off" required="" name="link" placeholder="Ссылка на картинку">
+        <button class="form-popup__button-submit" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
 
-    <template id="form-popup-template">
-      <div class="popup form-popup">
-        <div class="form-popup__container">
-          <button class="button-close button-hovered" type="button"></button>
-          <h2 class="form-popup__title"></h2>
-          <form class="form-popup__form" action="#">
-            <input class="form-popup__input" autocomplete="off" required>
-            <input class="form-popup__input" autocomplete="off" required>
-            <button class="form-popup__button-submit" type="submit"></button>
-          </form>
-        </div>
-      </div>
-    </template>
+  <div class="popup image-popup">
+    <figure class="image-popup__container">
+      <button class="button-close button-hovered" type="button"></button>
+        <img class="image-popup__img">
+        <figcaption class="image-popup__title"></figcaption>
+    </figure>
+  </div>
 
-    <template id="image-popup-template">
-      <div class="popup image-popup">
-        <figure class="image-popup__container">
-          <button class="button-close button-hovered" type="button"></button>
-            <img class="image-popup__img">
-            <figcaption class="image-popup__title"></figcaption>
-        </figure>
+  <template id="gallery-template">
+    <div class="gallery__card">
+      <img class="gallery__img">
+      <button class="gallery__trash-button" type="button"></button>
+
+      <div class="gallery__description">
+        <h2 class="gallery__title text-overflow"></h2>
+        <button class="gallery__like-button" type="button"></button>
       </div>
-    </template>
+    </div>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
