@@ -1,4 +1,4 @@
-.profile__add-button {
+.profile__button_responsible_add-card {
   min-width: 150px;
   min-height: 50px;
   border: 2px solid #fff;
@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.profile__add-button:before {
+.profile__button_responsible_add-card:before {
   content: '';
   min-width: 2px;
   min-height: 22px;
@@ -21,7 +21,7 @@
   position: absolute;
 }
 
-.profile__add-button:after {
+.profile__button_responsible_add-card:after {
   content: '';
   min-width: 2px;
   min-height: 22px;
@@ -31,16 +31,16 @@
 }
 
 @media screen and (max-width: 642px) {
-  .profile__add-button {
+  .profile__button_responsible_add-card {
     min-width: 282px;
     margin: 33px auto 0;
   }
 
-  .profile__add-button:before {
+  .profile__button_responsible_add-card:before {
     min-height: 16px;
   }
   
-  .profile__add-button:after {
+  .profile__button_responsible_add-card:after {
     min-height: 16px;
   }
 }

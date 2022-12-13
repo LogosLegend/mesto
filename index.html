@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <link rel="stylesheet" href="./pages/index.css">
+  <link rel="icon" href="images/logo.svg">
   <title>Место</title>
 </head>
 <body class="body">
@@ -22,70 +23,14 @@
 
         <div class="profile__info">
           <h1 class="profile__info-title text-overflow">Жак-Ив Кусто</h1>
-          <button class="profile__info-button button-hovered" type="button"></button>
+          <button class="profile__button profile__button_responsible_edit-info button-hovered" type="button"></button>
           <p class="profile__info-subtitle text-overflow">Исследователь океана</p>
         </div>
 
-        <button class="profile__add-button button-hovered" type="button"></button>
+        <button class="profile__button profile__button_responsible_add-card button-hovered" type="button"></button>
       </section>
 
-      <section class="gallery">
-
-        <div class="gallery__card">
-          <img class="gallery__img" src="images/karachevsk.jpg" alt="Карачаевск">
-
-          <div class="gallery__description">
-            <h2 class="gallery__title text-overflow">Карачаевск</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </div>
-        </div>
-
-        <div class="gallery__card">
-          <img class="gallery__img" src="images/elbrus.png" alt="Гора Эльбрус">
-          
-          <div class="gallery__description">
-            <h2 class="gallery__title text-overflow">Гора Эльбрус</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </div>
-        </div>
-
-        <div class="gallery__card">
-          <img class="gallery__img" src="images/dombay.png" alt="Домбай">
-
-          <div class="gallery__description">
-            <h2 class="gallery__title text-overflow">Домбай</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </div>
-        </div>
-
-        <div class="gallery__card">
-          <img class="gallery__img" src="images/karachevsk.jpg" alt="Карачаево-Черкесия">
-
-          <div class="gallery__description">
-            <h2 class="gallery__title text-overflow">Карачаево-Черкесия</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </div>
-        </div>
-
-        <div class="gallery__card">
-          <img class="gallery__img" src="images/elbrus.png" alt="Гора Эльбрус">
-
-          <div class="gallery__description">
-            <h2 class="gallery__title text-overflow">Гора Эльбрус</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </div>
-        </div>
-
-        <div class="gallery__card">
-          <img class="gallery__img" src="images/dombay.png" alt="Домбай">
-
-          <div class="gallery__description">
-            <h2 class="gallery__title text-overflow">Домбай</h2>
-            <button class="gallery__like-button" type="button"></button>
-          </div>
-        </div>
-      </section>
-
+      <section class="gallery"></section>
     </main>
 
     <footer class="footer">
@@ -93,17 +38,41 @@
     </footer>
   </div>
 
-  <div class="popup">
-      <div class="popup__container">
-        <button class="popup__button-close button-hovered" type="button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="edit-profile-form" action="#">
-          <input class="popup__input popup__input_type_name" name="name" value placeholder="Имя" autocomplete="off" required>
-          <input class="popup__input popup__input_type_specialty" name="specialty" value placeholder="О себе" autocomplete="off" required>
-          <button class="popup__button-submit" type="submit">Сохранить</button>
-        </form>
+    <template id="gallery-template">
+      <div class="gallery__card">
+        <img class="gallery__img gallery__button_popup_open">
+        <button class="gallery__trash-button" type="button"></button>
+
+        <div class="gallery__description">
+          <h2 class="gallery__title text-overflow"></h2>
+          <button class="gallery__like-button" type="button"></button>
+        </div>
       </div>
-    </div>
+    </template>
+
+    <template id="form-popup-template">
+      <div class="popup form-popup">
+        <div class="form-popup__container">
+          <button class="button-close button-hovered" type="button"></button>
+          <h2 class="form-popup__title"></h2>
+          <form class="form-popup__form" action="#">
+            <input class="form-popup__input" autocomplete="off" required>
+            <input class="form-popup__input" autocomplete="off" required>
+            <button class="form-popup__button-submit" type="submit"></button>
+          </form>
+        </div>
+      </div>
+    </template>
+
+    <template id="image-popup-template">
+      <div class="popup image-popup">
+        <figure class="image-popup__container">
+          <button class="button-close button-hovered" type="button"></button>
+            <img class="image-popup__img">
+            <figcaption class="image-popup__title"></figcaption>
+        </figure>
+      </div>
+    </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

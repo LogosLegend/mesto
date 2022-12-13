@@ -4,7 +4,12 @@
   grid-template-columns: repeat(auto-fit, 282px);
   grid-template-rows: repeat(auto-fit, 361px);
   gap: 20px 17px;
-  justify-content: center;
+}
+
+@media screen and (max-width: 880px) {
+  .gallery {
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 642px) {

@@ -1,4 +1,4 @@
-.popup__title {
+.form-popup__title {
   font-size: 24px;
   line-height: 29px;
   font-weight: 900;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 530px) {
-  .popup__title {
+  .form-popup__title {
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 74px;
