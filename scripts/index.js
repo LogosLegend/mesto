@@ -40,9 +40,9 @@ const popupsArr = [
   }
 ];
 
-popupAdd();
+addPopup();
 
-function popupAdd() {
+function addPopup() {
 
   for (let i = 0; i < popupsArr.length; i++) {
 
@@ -67,7 +67,7 @@ function popupAdd() {
 }
 
 //Добавление карт с картинками
-let initialCards = [
+const initialCards = [
   {
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
@@ -94,11 +94,11 @@ let initialCards = [
   }
 ];
 
-function galleryAddCard() {
+function addGalleryCard() {
 
-  const galleryCard = document.querySelectorAll('.gallery__card');
+  const galleryCards = document.querySelectorAll('.gallery__card');
 
-  for (let i = galleryCard.length; i < initialCards.length; i++) {
+  for (let i = galleryCards.length; i < initialCards.length; i++) {
   
     const galleryTemplate = document.querySelector('#gallery-template').content;
     const galleryCardClone = galleryTemplate.querySelector('.gallery__card').cloneNode(true);
@@ -112,50 +112,50 @@ function galleryAddCard() {
   }
 }
 
-galleryAddCard();
+addGalleryCard();
 
-const popup = document.querySelectorAll('.popup'),
+const popups = document.querySelectorAll('.popup'),
     popupInputTypeName = document.querySelector('.form-popup__input_type_profile-name'),
     popupInputTypeSpecialty = document.querySelector('.form-popup__input_type_specialty'),
     profileInfoTitle = document.querySelector('.profile__info-title'), 
     profileInfoSubtitle = document.querySelector('.profile__info-subtitle'),
-    profileButton = document.querySelectorAll('.profile__button');
+    profileButtons = document.querySelectorAll('.profile__button');
 
     popupInputTypeName.value = profileInfoTitle.textContent;
     popupInputTypeSpecialty.value = profileInfoSubtitle.textContent;
 
 //Открытие попапов в Профиле
-profileButton.forEach(function(e, i) {
+profileButtons.forEach(function(e, i) {
 
   e.addEventListener('click', function() {
 
-    popup[i].classList.add('popup_opened');
+    popups[i].classList.add('popup_opened');
   });
 });
 //Закрытие попапов в Профиле
-popup.forEach(function(e) {
+popups.forEach(function(e) {
 
   e.addEventListener('mousedown', function() {
   
-    if (event.target.closest('.button-close') || !event.target.closest('.form-popup__container')) popupClose(e);
+    if (event.target.closest('.button-close') || !event.target.closest('.form-popup__container')) closePopup(e);
   });
 
   document.addEventListener('keydown', function(k) {
 
-    if (k.which === 27 && e.classList.contains('popup_opened')) popupClose(e);//Закрытие Попапов в профиле через кнопку
+    if (k.which === 27 && e.classList.contains('popup_opened')) closePopup(e);//Закрытие Попапов в профиле через кнопку
 
-    if (k.which === 27 && document.querySelector('.image-popup')) ImagePopupClose();//Закрытие Попапов картинки через кнопку
+    if (k.which === 27 && document.querySelector('.image-popup')) closeImagePopup();//Закрытие Попапов картинки через кнопку
   });
 });
 
-function popupClose (popup) {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-const popupForm = document.querySelectorAll('.form-popup__form');
+const popupForms = document.querySelectorAll('.form-popup__form');
 
 //Обработка форм при нажатии кнопок в попапах Профиля
-popupForm.forEach(function(e) {
+popupForms.forEach(function(e) {
 
   e.addEventListener('submit', function(button) {
     button.preventDefault();
@@ -179,7 +179,7 @@ function handleFormInfo (e) {//Изменение имени и специаль
   profileInfoTitle.textContent = popupInputTypeName.value;
   profileInfoSubtitle.textContent = popupInputTypeSpecialty.value;
 
-  popupClose(e.closest('.popup'));
+  closePopup(e.closest('.popup'));
 }
 
 const popupInputTypeCardName = document.querySelector('.form-popup__input_type_card-name'),
@@ -189,9 +189,9 @@ function handleFormCard (e) {//Добавленине названия и ссы
 
   initialCards.push({name: `${popupInputTypeCardName.value}`, link: `${popupInputTypeLink.value}`});
 
-  galleryAddCard();
+  addGalleryCard();
 
-  popupClose(e.closest('.popup'));
+  closePopup(e.closest('.popup'));
 
   popupInputTypeCardName.value = '';
   popupInputTypeLink.value = '';
@@ -214,18 +214,18 @@ gallery.addEventListener('click', function(e) {
 
     case e.target.classList.contains('gallery__img'):
 
-      ImagePopupOpen(e);//Создание попапа картинки
+      openImagePopup(e);//Создание попапа картинки
   }
 });
 
 function DeleteCard(e) {
 
-  let galleryTrashButton = document.querySelectorAll('.gallery__trash-button');
-      indexCardToDelete = Array.prototype.indexOf.call(galleryTrashButton, e.target);
+  const galleryTrashButtons = document.querySelectorAll('.gallery__trash-button');
+      indexCardToDelete = Array.prototype.indexOf.call(galleryTrashButtons, e.target);
 
   e.target.closest('.gallery__card').remove();
 
-  let indexReverse = galleryTrashButton.length - 1 - indexCardToDelete;//После удаления карточки, удаляется соответствующая запись из массива карт
+  const indexReverse = galleryTrashButtons.length - 1 - indexCardToDelete;//После удаления карточки, удаляется соответствующая запись из массива карт
                                                                        //Так как карточки выводятся вначало, а в массив данные поступают в конец,
                                                                        //то для поиска необходимых записей в массиве индексы нужно "перевернуть".
                                                                        //Если серверная часть будет хранить массивы, то в будущем не придётся делать
@@ -239,15 +239,13 @@ function LikeCard(e) {
   e.target.classList.toggle('gallery__like-button_type_active');
 }
 
-const galleryButtonPopupOpen = document.querySelectorAll('.gallery__button_popup_open');
-
-function ImagePopupOpen(e) {//Попап создаётся когда на картинку нажимают и удаляется после срабатывания событий на закрытие.
+function openImagePopup(e) {//Попап создаётся когда на картинку нажимают и удаляется после срабатывания событий на закрытие.
                             //Это сделанно для того, чтобы при большой количестве картинок не создавалось такое же огромное
                             //количество попапов для них.
 
   if (document.querySelector('.image-popup') !== null) document.querySelector('.image-popup').remove();
   //Проверка на существование уже созданого попапа картинки
-  //Проверка нужна для того, чтобы при многочисленных открытиях и закрытиях попапа в функции ImagePopupClose не оставался скрытый попап
+  //Проверка нужна для того, чтобы при многочисленных открытиях и закрытиях попапа в функции closeImagePopup не оставался скрытый попап
   //и в дальнейшем не нарушал работу кода.
   
   const imagePopupTemplate = document.querySelector('#image-popup-template').content;
@@ -264,7 +262,7 @@ function ImagePopupOpen(e) {//Попап создаётся когда на ка
 
   imagePopup.addEventListener('click', function(e) {//Условия закрытия попапа такие же, как у попапов в Профиле
 
-   if (e.target.classList.contains('button-close') || !event.target.closest('.image-popup__container')) ImagePopupClose();
+   if (e.target.classList.contains('button-close') || !event.target.closest('.image-popup__container')) closeImagePopup();
   });
 
   setTimeout(() => imagePopup.classList.add('popup_opened'));
@@ -272,7 +270,7 @@ function ImagePopupOpen(e) {//Попап создаётся когда на ка
   //Это заставляет браузер форсированно применить изменения, иначе анимация бы не проигрывалась из-за единовременном выполнении браузером нескольких действий.
 }
 
-function ImagePopupClose() {
+function closeImagePopup() {
 
   const imagePopup = document.querySelector('.image-popup');
 
@@ -281,6 +279,6 @@ function ImagePopupClose() {
   setTimeout(() => imagePopup.remove(), 300);
   //Анимация в css имеет задержку 300 мс, чтобы анимация успела полностью проиграться блок удаляется спустя 300 мс.
   //Если пользователь будет многократно открывать и закрывать попап, то он останется на странице, чтобы этого не допустить нужна проверка на невидимый попап
-  //вначале функции ImagePopupOpen
+  //вначале функции openImagePopup
   //P.S. Добавление карточкам класса с "pointer-events: none" не решает эту проблему.
 }
