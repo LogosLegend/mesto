@@ -1,6 +1,6 @@
 .button-close {
   position: absolute;
-  background: url(../../../../images/close-icon.svg) no-repeat;
+  background: url(../../images/close-icon.svg) no-repeat;
   min-width: 32px;
   min-height: 32px;
   display: flex;
