@@ -2,9 +2,24 @@ const body = document.querySelector('.body');
 
 body.classList.remove('preload');//Включение анимации после загрузки попапов
 
-const gallery = document.querySelector('.gallery');
+const gallery = document.querySelector('.gallery'),
+      galleryTemplate = document.querySelector('#gallery-template').content,
+      popups = document.querySelectorAll('.popup'),
+      popupInputTypeName = document.querySelector('.form-popup__input_type_profile-name'),
+      popupInputTypeSpecialty = document.querySelector('.form-popup__input_type_specialty'),
+      profileInfoTitle = document.querySelector('.profile__info-title'), 
+      profileInfoSubtitle = document.querySelector('.profile__info-subtitle'),
+      profileButtons = document.querySelectorAll('.profile__button'),
+      imagePopup = document.querySelector('.image-popup'),
+      editProfilePopup = document.querySelector('.edit-profile-popup'),
+      editCardPopup = document.querySelector('.edit-card-popup'),
+      profileButtonResponsibleEditInfo = document.querySelector('.profile__button_responsible_edit-info'),
+      profileButtonResponsibleAddCard = document.querySelector('.profile__button_responsible_add-card'),
+      popupForms = document.querySelectorAll('.form-popup__form'),
+      popupInputTypeCardName = document.querySelector('.form-popup__input_type_card-name'),
+      popupInputTypeLink = document.querySelector('.form-popup__input_type_link');
 
-//Добавление карт с картинками
+//Добавление карт с картинками из массива
 const initialCards = [
   {
     name: 'Байкал',
@@ -32,46 +47,74 @@ const initialCards = [
   }
 ];
 
-function addGalleryCard() {
+for (let i = 0; i < initialCards.length; i++) {
 
-  const galleryCards = document.querySelectorAll('.gallery__card');
+  let galleryCardClone = galleryTemplate.querySelector('.gallery__card').cloneNode(true);
 
-  for (let i = galleryCards.length; i < initialCards.length; i++) {
+  galleryCardClone.querySelector('.gallery__img').src = initialCards[i].link;
+  galleryCardClone.querySelector('.gallery__img').alt = initialCards[i].name;
+
+  galleryCardClone.querySelector('.gallery__title').textContent = initialCards[i].name;
   
-    const galleryTemplate = document.querySelector('#gallery-template').content;
-    const galleryCardClone = galleryTemplate.querySelector('.gallery__card').cloneNode(true);
-  
-    galleryCardClone.querySelector('.gallery__img').src = initialCards[i].link;
-    galleryCardClone.querySelector('.gallery__img').alt = initialCards[i].name;
-  
-    galleryCardClone.querySelector('.gallery__title').textContent = initialCards[i].name;
-    
-    gallery.prepend(galleryCardClone);
-  }
+  gallery.prepend(galleryCardClone);
 }
 
-addGalleryCard();
+//Функция с прослушивателем для карт
+function cardListener(e) {
 
-const popups = document.querySelectorAll('.popup'),
-    popupInputTypeName = document.querySelector('.form-popup__input_type_profile-name'),
-    popupInputTypeSpecialty = document.querySelector('.form-popup__input_type_specialty'),
-    profileInfoTitle = document.querySelector('.profile__info-title'), 
-    profileInfoSubtitle = document.querySelector('.profile__info-subtitle'),
-    profileButtons = document.querySelectorAll('.profile__button');
+  e.addEventListener('click', function(e) {
 
-    popupInputTypeName.value = profileInfoTitle.textContent;
-    popupInputTypeSpecialty.value = profileInfoSubtitle.textContent;
+    switch(true) {
 
-//Открытие попапов в Профиле
-profileButtons.forEach(function(e, i) {
+      case e.target.classList.contains('gallery__trash-button'):
 
-  e.addEventListener('click', function() {
+        deleteCard(e);//Удаление карточки
+        break;
 
-    popups[i].classList.add('popup_opened');
+      case e.target.classList.contains('gallery__like-button'):
+
+        likeCard(e);//Лайк карточки
+        break;
+
+      case e.target.classList.contains('gallery__img'):
+
+        fillPopup(e);//Открытие попапа карточки
+    }
   });
+}
+
+let galleryCards = document.querySelectorAll('.gallery__card');
+
+galleryCards.forEach(function(e) {//Добавление прослушивателей к первым 6 карточкам из массива
+
+  cardListener(e)
+});
+
+//Открытие попапов Профиля
+function openPopup(popup) {
+
+  popup.classList.add('popup_opened');
+}
+
+profileButtonResponsibleEditInfo.addEventListener('click', function(){
+
+  popupInputTypeName.value = profileInfoTitle.textContent;
+  popupInputTypeSpecialty.value = profileInfoSubtitle.textContent;
+
+  openPopup(editProfilePopup);
+});
+
+profileButtonResponsibleAddCard.addEventListener('click', function(){
+
+  openPopup(editCardPopup);
 });
 
 //Закрытие попапов
+function closePopup(popup) {
+
+  popup.classList.remove('popup_opened');
+}
+
 popups.forEach(function(e) {
 
   e.addEventListener('mousedown', function() {
@@ -81,17 +124,10 @@ popups.forEach(function(e) {
 
   document.addEventListener('keydown', function(k) {
 
-    if (k.which === 27 && e.classList.contains('popup_opened')) closePopup(e);
+    if (k.key == 'Escape' && e.classList.contains('popup_opened')) closePopup(e);
 
   });
 });
-
-function closePopup(popup) {
-
-  popup.classList.remove('popup_opened');
-}
-
-const popupForms = document.querySelectorAll('.form-popup__form');
 
 //Обработка форм при нажатии кнопок в попапах Профиля
 popupForms.forEach(function(e) {
@@ -113,7 +149,31 @@ popupForms.forEach(function(e) {
   });
 });
 
-function handleFormInfo (e) {//Изменение имени и специальности в профиле
+//Функция для сборки карточки из данных от пользователя
+function collectCard() {
+
+  const galleryCardClone = galleryTemplate.querySelector('.gallery__card').cloneNode(true);
+
+  galleryCardClone.querySelector('.gallery__img').src = popupInputTypeLink.value;
+  galleryCardClone.querySelector('.gallery__img').alt = popupInputTypeCardName.value;
+
+  galleryCardClone.querySelector('.gallery__title').textContent = popupInputTypeCardName.value;
+  
+  return galleryCardClone;
+}
+
+//Функция для вывода новой карточки на страницу
+function createCard() {
+
+  gallery.prepend(collectCard());
+
+  galleryCards = document.querySelectorAll('.gallery__card');
+
+  cardListener(galleryCards[0]);
+}
+
+//Функция для изменения имени и специальности в профиле
+function handleFormInfo (e) {
 
   profileInfoTitle.textContent = popupInputTypeName.value;
   profileInfoSubtitle.textContent = popupInputTypeSpecialty.value;
@@ -121,72 +181,34 @@ function handleFormInfo (e) {//Изменение имени и специаль
   closePopup(e.closest('.popup'));
 }
 
-const popupInputTypeCardName = document.querySelector('.form-popup__input_type_card-name'),
-    popupInputTypeLink = document.querySelector('.form-popup__input_type_link');
+//Функция для обработки данных от формы для создания карт
+function handleFormCard (e) {
 
-function handleFormCard (e) {//Добавленине названия и ссылки на картинку в массив с последующим вызовом функции добавления карточки из массива
-
-  initialCards.push({name: `${popupInputTypeCardName.value}`, link: `${popupInputTypeLink.value}`});
-
-  addGalleryCard();
+  createCard();
 
   closePopup(e.closest('.popup'));
 
-  popupInputTypeCardName.value = '';
-  popupInputTypeLink.value = '';
+  e.reset();
 }
 
-//Обработка событий в галерее
-gallery.addEventListener('click', function(e) {
-
-    switch (true) {
-
-      case e.target.classList.contains('gallery__trash-button'):
-
-        DeleteCard(e);//Удаление карточки
-        break;
-
-      case e.target.classList.contains('gallery__like-button'):
-
-        LikeCard(e);//Лайк карточки
-        break;
-
-      case e.target.classList.contains('gallery__img'):
-
-        openImagePopup(e);//Открытие попапа карточки
-  }
-});
-
-function DeleteCard(e) {
+function deleteCard(e) {
 
   const galleryTrashButtons = document.querySelectorAll('.gallery__trash-button');
-      indexCardToDelete = Array.prototype.indexOf.call(galleryTrashButtons, e.target);
 
   e.target.closest('.gallery__card').remove();
-
-  const indexReverse = galleryTrashButtons.length - 1 - indexCardToDelete;
-  //После удаления карточки, удаляется соответствующая запись из массива карт
-  //Так как карточки выводятся вначало, а в массив данные поступают в конец,
-  //то для поиска необходимых записей в массиве индексы нужно "перевернуть".
-  //Если серверная часть будет хранить массивы, то в будущем не придётся делать
-  //функционал для удаления записей из массива.
-
-  initialCards.splice(indexReverse, 1);
 }
 
-function LikeCard(e) {
+function likeCard(e) {
 
   e.target.classList.toggle('gallery__like-button_type_active');
 }
 
-function openImagePopup(e) {
-
-  const imagePopup = document.querySelector('.image-popup'); 
+function fillPopup(e) {
 
   imagePopup.querySelector('.image-popup__img').src = e.target.src; 
   imagePopup.querySelector('.image-popup__img').alt = e.target.alt; 
 
   imagePopup.querySelector('.image-popup__title').textContent = e.target.alt;
 
-  imagePopup.classList.add('popup_opened');
+  openPopup(imagePopup);
 }
