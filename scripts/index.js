@@ -11,6 +11,8 @@ const gallery = document.querySelector('.gallery'),
       profileInfoSubtitle = document.querySelector('.profile__info-subtitle'),
       profileButtons = document.querySelectorAll('.profile__button'),
       imagePopup = document.querySelector('.image-popup'),
+      imagePopupImg = imagePopup.querySelector('.image-popup__img'),
+      imagePopupTitle = imagePopup.querySelector('.image-popup__title'),
       editProfilePopup = document.querySelector('.edit-profile-popup'),
       editCardPopup = document.querySelector('.edit-card-popup'),
       profileButtonResponsibleEditInfo = document.querySelector('.profile__button_responsible_edit-info'),
@@ -49,46 +51,8 @@ const initialCards = [
 
 for (let i = 0; i < initialCards.length; i++) {
 
-  let galleryCardClone = galleryTemplate.querySelector('.gallery__card').cloneNode(true);
-
-  galleryCardClone.querySelector('.gallery__img').src = initialCards[i].link;
-  galleryCardClone.querySelector('.gallery__img').alt = initialCards[i].name;
-
-  galleryCardClone.querySelector('.gallery__title').textContent = initialCards[i].name;
-  
-  gallery.prepend(galleryCardClone);
+  gallery.prepend(createCard(initialCards[i].link, initialCards[i].name));
 }
-
-//Функция с прослушивателем для карт
-function cardListener(e) {
-
-  e.addEventListener('click', function(e) {
-
-    switch(true) {
-
-      case e.target.classList.contains('gallery__trash-button'):
-
-        deleteCard(e);//Удаление карточки
-        break;
-
-      case e.target.classList.contains('gallery__like-button'):
-
-        likeCard(e);//Лайк карточки
-        break;
-
-      case e.target.classList.contains('gallery__img'):
-
-        fillPopup(e);//Открытие попапа карточки
-    }
-  });
-}
-
-let galleryCards = document.querySelectorAll('.gallery__card');
-
-galleryCards.forEach(function(e) {//Добавление прослушивателей к первым 6 карточкам из массива
-
-  cardListener(e)
-});
 
 //Открытие попапов Профиля
 function openPopup(popup) {
@@ -149,31 +113,41 @@ popupForms.forEach(function(e) {
   });
 });
 
-//Функция для сборки карточки из данных от пользователя
-function collectCard() {
+//Функция для создания карточки из данных от пользователя
+function createCard(link, name) {
 
   const galleryCardClone = galleryTemplate.querySelector('.gallery__card').cloneNode(true);
 
-  galleryCardClone.querySelector('.gallery__img').src = popupInputTypeLink.value;
-  galleryCardClone.querySelector('.gallery__img').alt = popupInputTypeCardName.value;
+  galleryCardClone.querySelector('.gallery__img').src = link;
+  galleryCardClone.querySelector('.gallery__img').alt = name;
 
-  galleryCardClone.querySelector('.gallery__title').textContent = popupInputTypeCardName.value;
+  galleryCardClone.querySelector('.gallery__title').textContent = name;
+
+  galleryCardClone.addEventListener('click', function(e) {
+
+    switch(true) {
+
+      case e.target.classList.contains('gallery__trash-button'):
+
+        deleteCard(e);//Удаление карточки
+        break;
+
+      case e.target.classList.contains('gallery__like-button'):
+
+        likeCard(e);//Лайк карточки
+        break;
+
+      case e.target.classList.contains('gallery__img'):
+
+        fillPopup(e);//Открытие попапа карточки
+    }
+  });
   
   return galleryCardClone;
 }
 
-//Функция для вывода новой карточки на страницу
-function createCard() {
-
-  gallery.prepend(collectCard());
-
-  galleryCards = document.querySelectorAll('.gallery__card');
-
-  cardListener(galleryCards[0]);
-}
-
 //Функция для изменения имени и специальности в профиле
-function handleFormInfo (e) {
+function handleFormInfo(e) {
 
   profileInfoTitle.textContent = popupInputTypeName.value;
   profileInfoSubtitle.textContent = popupInputTypeSpecialty.value;
@@ -182,9 +156,9 @@ function handleFormInfo (e) {
 }
 
 //Функция для обработки данных от формы для создания карт
-function handleFormCard (e) {
+function handleFormCard(e) {
 
-  createCard();
+  gallery.prepend(createCard(popupInputTypeLink.value, popupInputTypeCardName.value));
 
   closePopup(e.closest('.popup'));
 
@@ -192,8 +166,6 @@ function handleFormCard (e) {
 }
 
 function deleteCard(e) {
-
-  const galleryTrashButtons = document.querySelectorAll('.gallery__trash-button');
 
   e.target.closest('.gallery__card').remove();
 }
@@ -205,10 +177,10 @@ function likeCard(e) {
 
 function fillPopup(e) {
 
-  imagePopup.querySelector('.image-popup__img').src = e.target.src; 
-  imagePopup.querySelector('.image-popup__img').alt = e.target.alt; 
+  imagePopupImg.src = e.target.src; 
+  imagePopupImg.alt = e.target.alt; 
 
-  imagePopup.querySelector('.image-popup__title').textContent = e.target.alt;
+  imagePopupTitle.textContent = e.target.alt;
 
   openPopup(imagePopup);
 }
