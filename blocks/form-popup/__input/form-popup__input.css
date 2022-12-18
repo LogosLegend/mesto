@@ -9,6 +9,6 @@
   padding: 0 0 9px;
 }
 
-.form-popup__input:first-child {
-  margin: 0 0 30px;
+.form-popup__input::placeholder {
+  color: #C4C4C4;
 }

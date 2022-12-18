@@ -43,8 +43,12 @@
       <button class="button-close button-hovered" type="button"></button>
       <h2 class="form-popup__title">Редактировать профиль</h2>
       <form class="form-popup__form" action="#" name="editProfileForm">
-        <input class="form-popup__input form-popup__input_type_profile-name" autocomplete="off" required="" name="fullName" placeholder="Имя">
-        <input class="form-popup__input form-popup__input_type_specialty" autocomplete="off" required="" name="specialty" placeholder="О себе">
+          <input id="fullName-input" class="form-popup__input form-popup__input_type_profile-name" autocomplete="off" required minlength="2" maxlength="40" name="fullName" placeholder="Имя">
+          <span class="form-popup__error fullName-input-error"></span>
+
+          <input id="specialty-input" class="form-popup__input form-popup__input_type_specialty" autocomplete="off" required minlength="2" maxlength="200" name="specialty" placeholder="О себе">
+          <span class="form-popup__error specialty-input-error"></span>
+
         <button class="form-popup__button-submit" type="submit">Сохранить</button>
       </form>
     </div>
@@ -55,8 +59,11 @@
       <button class="button-close button-hovered" type="button"></button>
       <h2 class="form-popup__title">Новое место</h2>
       <form class="form-popup__form" action="#" name="editCardForm">
-        <input class="form-popup__input form-popup__input_type_card-name" autocomplete="off" required="" name="cardName" placeholder="Название">
-        <input class="form-popup__input form-popup__input_type_link" autocomplete="off" required="" name="link" placeholder="Ссылка на картинку">
+          <input id="cardName-input" class="form-popup__input form-popup__input_type_card-name" autocomplete="off" required minlength="2" maxlength="40" name="cardName" placeholder="Название">
+          <span class="form-popup__error cardName-input-error"></span>
+
+          <input id="link-input" class="form-popup__input form-popup__input_type_link" autocomplete="off" required type="url" name="link" placeholder="Ссылка на картинку">
+          <span class="form-popup__error link-input-error"></span>
         <button class="form-popup__button-submit" type="submit">Создать</button>
       </form>
     </div>
@@ -81,6 +88,7 @@
       </div>
     </div>
   </template>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

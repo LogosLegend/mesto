@@ -58,17 +58,30 @@ for (let i = 0; i < initialCards.length; i++) {
 function openPopup(popup) {
 
   popup.classList.add('popup_opened');
+
+  document.addEventListener('keydown', listenerEscButton);
+
+  listenerEscButton.popup = popup;
 }
 
-profileButtonResponsibleEditInfo.addEventListener('click', function(){
+function listenerEscButton(k) {
+
+  if (k.key == 'Escape') {
+    closePopup(listenerEscButton.popup);
+  }
+}
+
+profileButtonResponsibleEditInfo.addEventListener('click', () => {
 
   popupInputTypeName.value = profileInfoTitle.textContent;
   popupInputTypeSpecialty.value = profileInfoSubtitle.textContent;
 
+  resetValidation(editProfilePopup.querySelector('.form-popup__form'));
+
   openPopup(editProfilePopup);
 });
 
-profileButtonResponsibleAddCard.addEventListener('click', function(){
+profileButtonResponsibleAddCard.addEventListener('click', () => {
 
   openPopup(editCardPopup);
 });
@@ -77,26 +90,22 @@ profileButtonResponsibleAddCard.addEventListener('click', function(){
 function closePopup(popup) {
 
   popup.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown', listenerEscButton);
 }
 
-popups.forEach(function(e) {
+popups.forEach((e) => {
 
-  e.addEventListener('mousedown', function() {
+  e.addEventListener('mousedown', () => {
   
     if (event.target.closest('.button-close') || !event.target.closest('[class*="container"]')) closePopup(e);
-  });
-
-  document.addEventListener('keydown', function(k) {
-
-    if (k.key == 'Escape' && e.classList.contains('popup_opened')) closePopup(e);
-
   });
 });
 
 //Обработка форм при нажатии кнопок в попапах Профиля
-popupForms.forEach(function(e) {
+popupForms.forEach((e) => {
 
-  e.addEventListener('submit', function(button) {
+  e.addEventListener('submit', (button) => {
     button.preventDefault();
 
     switch (e.name) {
@@ -123,7 +132,7 @@ function createCard(link, name) {
 
   galleryCardClone.querySelector('.gallery__title').textContent = name;
 
-  galleryCardClone.addEventListener('click', function(e) {
+  galleryCardClone.addEventListener('click', (e) => {
 
     switch(true) {
 

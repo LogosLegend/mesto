@@ -1,5 +1,5 @@
 .form-popup__button-submit {
-  margin: 48px 0 0;
+  margin: 18px 0 0;
   min-width: 358px;
   min-height: 50px;
   background: #000;
@@ -11,6 +11,10 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .form-popup__button-submit:hover {
