@@ -19,36 +19,11 @@ const gallery = document.querySelector('.gallery'),
       profileButtonResponsibleAddCard = document.querySelector('.profile__button_responsible_add-card'),
       popupForms = document.querySelectorAll('.form-popup__form'),
       popupInputTypeCardName = document.querySelector('.form-popup__input_type_card-name'),
-      popupInputTypeLink = document.querySelector('.form-popup__input_type_link');
+      popupInputTypeLink = document.querySelector('.form-popup__input_type_link'),
+      editProfileForm = document.forms.editProfileForm,
+      editCardForm = document.forms.editCardForm;
 
 //Добавление карт с картинками из массива
-const initialCards = [
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-    {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  }
-];
-
 for (let i = 0; i < initialCards.length; i++) {
 
   gallery.prepend(createCard(initialCards[i].link, initialCards[i].name));
@@ -64,9 +39,9 @@ function openPopup(popup) {
   listenerEscButton.popup = popup;
 }
 
-function listenerEscButton(k) {
+function listenerEscButton(e) {
 
-  if (k.key == 'Escape') {
+  if (e.key === 'Escape') {
     closePopup(listenerEscButton.popup);
   }
 }
@@ -76,7 +51,7 @@ profileButtonResponsibleEditInfo.addEventListener('click', () => {
   popupInputTypeName.value = profileInfoTitle.textContent;
   popupInputTypeSpecialty.value = profileInfoSubtitle.textContent;
 
-  resetValidation(editProfilePopup.querySelector('.form-popup__form'));
+  resetValidation(editProfilePopup.querySelector('.form-popup__form'), param);
 
   openPopup(editProfilePopup);
 });
@@ -103,23 +78,16 @@ popups.forEach((e) => {
 });
 
 //Обработка форм при нажатии кнопок в попапах Профиля
-popupForms.forEach((e) => {
+editProfileForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  handleFormInfo(editProfileForm);
+  disabledButton(e);
+});
 
-  e.addEventListener('submit', (button) => {
-    button.preventDefault();
-
-    switch (e.name) {
-
-      case 'editProfileForm':
-
-        handleFormInfo(e);
-        break;
-
-      case 'editCardForm':
-
-        handleFormCard(e);
-    }
-  });
+editCardForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  handleFormCard(editCardForm);
+  disabledButton(e);
 });
 
 //Функция для создания карточки из данных от пользователя
@@ -127,30 +95,32 @@ function createCard(link, name) {
 
   const galleryCardClone = galleryTemplate.querySelector('.gallery__card').cloneNode(true);
 
-  galleryCardClone.querySelector('.gallery__img').src = link;
-  galleryCardClone.querySelector('.gallery__img').alt = name;
+  const galleryImgClone = galleryCardClone.querySelector('.gallery__img'),
+        galleryTitleClone = galleryCardClone.querySelector('.gallery__title'),
+        galleryTrashButtonClone = galleryCardClone.querySelector('.gallery__trash-button'),
+        galleryLikeButtonClone = galleryCardClone.querySelector('.gallery__like-button');
 
-  galleryCardClone.querySelector('.gallery__title').textContent = name;
+  galleryImgClone.src = link;
+  galleryImgClone.alt = name;
 
-  galleryCardClone.addEventListener('click', (e) => {
+  galleryTitleClone.textContent = name;
 
-    switch(true) {
+  galleryTrashButtonClone.addEventListener('click', (e) => {
 
-      case e.target.classList.contains('gallery__trash-button'):
-
-        deleteCard(e);//Удаление карточки
-        break;
-
-      case e.target.classList.contains('gallery__like-button'):
-
-        likeCard(e);//Лайк карточки
-        break;
-
-      case e.target.classList.contains('gallery__img'):
-
-        fillPopup(e);//Открытие попапа карточки
-    }
+    deleteCard(e);
   });
+
+  galleryLikeButtonClone.addEventListener('click', (e) => {
+
+    likeCard(e);
+  });
+
+  galleryImgClone.addEventListener('click', (e) => {
+
+    fillPopup(e);
+  });
+
+
   
   return galleryCardClone;
 }
@@ -172,6 +142,11 @@ function handleFormCard(e) {
   closePopup(e.closest('.popup'));
 
   e.reset();
+}
+
+function disabledButton(e) {
+
+  e.submitter.disabled = true;
 }
 
 function deleteCard(e) {

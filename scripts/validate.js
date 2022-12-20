@@ -8,7 +8,7 @@ const param = {
 };
 
 
-function showInputError(form, input, errorMessage) {
+function showInputError(form, input, errorMessage, param) {
 
   const errorElement = form.querySelector(`.${input.id}-error`);
 
@@ -17,7 +17,7 @@ function showInputError(form, input, errorMessage) {
   errorElement.classList.add(param.errorClass);
 };
 
-function hideInputError(form, input) {
+function hideInputError(form, input, param) {
 
   const errorElement = form.querySelector(`.${input.id}-error`);
 
@@ -26,15 +26,15 @@ function hideInputError(form, input) {
   errorElement.textContent = '';
 };
 
-function checkInputValidity(form, input) {
+function checkInputValidity(form, input, params) {
 
   if (!input.validity.valid) {
 
-    showInputError(form, input, input.validationMessage);
+    showInputError(form, input, input.validationMessage, param);
 
   } else {
 
-    hideInputError(form, input);
+    hideInputError(form, input, param);
   }
 };
 
@@ -46,50 +46,52 @@ function hasInvalidInput(inputList) {
   }); 
 }
 
-function toggleButtonState(inputList, buttonElement) {
-  
+function toggleButtonState(inputList, buttonElement, param) {
+
   if (hasInvalidInput(inputList)) {
     
     buttonElement.classList.add(param.inactiveButtonClass);
+    buttonElement.disabled = true;
 
   } else {
-    
+
     buttonElement.classList.remove(param.inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 }
 
-function setEventListeners(form) {
+function setEventListeners(form, param) {
 
   const inputList = Array.from(form.querySelectorAll(param.inputSelector));
   const buttonElement = form.querySelector(param.submitButtonSelector);
 
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, param);
 
   inputList.forEach((input) => {
 
     input.addEventListener('input', () => {
 
-      checkInputValidity(form, input);
+      checkInputValidity(form, input, param);
 
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, param);
     });
   });
 };
 
-function resetValidation(form) {
+function resetValidation(form, param) {
 
   const inputList = Array.from(editProfilePopup.querySelectorAll(param.inputSelector));
   const buttonElement = editProfilePopup.querySelector(param.submitButtonSelector);
 
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, param);
 
   inputList.forEach((input) => {
 
-      hideInputError(form, input);
+      hideInputError(form, input, param);
   });
 }
 
-function enableValidation() {
+function enableValidation(param) {
 
   const formList = Array.from(document.querySelectorAll(param.formSelector));
   
@@ -100,8 +102,8 @@ function enableValidation() {
       e.preventDefault();
     });
 
-    setEventListeners(form);
+    setEventListeners(form, param);
   });
 }
 
-enableValidation();
+enableValidation(param);
