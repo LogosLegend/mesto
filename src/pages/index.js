@@ -162,11 +162,11 @@ function openDeletePopup(id, e) {
   deleteCardPopup.open(id, e);
 }
 
-function deleteCard(id, button) {
+function deleteCard(id, e, button) {
   
   api.deleteCard(id)
     .then((data) => {
-      deleteCardPopup.deleteCard();
+      e.remove();
       deleteCardPopup.close();
     })
     .catch((err) => showError(err))
