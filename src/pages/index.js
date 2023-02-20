@@ -25,8 +25,7 @@ import {
         formValidators,
         popupDelete,
         buttonPopupDelete,
-        trashButtons,
-        _id
+        trashButtons
 
 } from '../utils/constants.js';
 
@@ -69,12 +68,12 @@ api.load()
     profileInfoTitle.textContent = name;
     profileInfoSubtitle.textContent = about;
     profileAvatarImage.src = avatar;
-    sectionCreate.renderItems(cards)
+    sectionCreate.renderItems(cards.reverse())
   })
   .catch((err) => showError(err));
 
 function createCard(item) {
-  const cardElement = new Card(item, galleryTemplate, _id, fillPopup, openDeletePopup, like, unLike).createCard();
+  const cardElement = new Card(item, galleryTemplate, '6e7ae393808bf230213d7e32', fillPopup, openDeletePopup, like, unLike).createCard();
   return cardElement;
 }
 
