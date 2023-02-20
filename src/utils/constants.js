@@ -20,8 +20,7 @@ export const body = document.querySelector('.body'),
              deleteForm = document.forms.deleteForm,
              popupDelete = document.querySelector('.popup-delete'),
              buttonPopupDelete = document.querySelector('.form-popup__button-submit-delete'),
-             trashButtons = document.querySelectorAll('.gallery__trash-button'),
-             _id = '6e7ae393808bf230213d7e32';
+             trashButtons = document.querySelectorAll('.gallery__trash-button')
 
 export const param = {
   formSelector: '.form-popup__form',
