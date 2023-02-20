@@ -21,14 +21,9 @@ export default class DeletePopup extends Popup {
     
       e.preventDefault();
       e.submitter.textContent = 'Удаление...'
-      this._deleteCard(this._id, e.submitter)
+      this._deleteCard(this._id, this._e, e.submitter)
     });
 
     super.setEventListeners();
-  }
-
-  deleteCard() { //В ревью говорилось реализоать этот метод в классе Card, я думаю, что имелся ввиду класс DeletePopup
-
-    this._e.remove();
   }
 }
